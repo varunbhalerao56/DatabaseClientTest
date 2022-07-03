@@ -48,24 +48,31 @@
     ]
   },
   "packageFolders": {
-    "/Users/skywar56/.nuget/packages/": {}
+    "C:\\Users\\huanting\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/skywar56/Downloads/DatabaseClientTest/C#.csproj",
+      "projectUniqueName": "C:\\Users\\huanting\\Source\\Repos\\Ollie\\DatabaseClientTest\\C#.csproj",
       "projectName": "C#",
-      "projectPath": "/Users/skywar56/Downloads/DatabaseClientTest/C#.csproj",
-      "packagesPath": "/Users/skywar56/.nuget/packages/",
-      "outputPath": "/Users/skywar56/Downloads/DatabaseClientTest/obj/",
+      "projectPath": "C:\\Users\\huanting\\Source\\Repos\\Ollie\\DatabaseClientTest\\C#.csproj",
+      "packagesPath": "C:\\Users\\huanting\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\huanting\\Source\\Repos\\Ollie\\DatabaseClientTest\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "/Users/skywar56/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\huanting\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -104,7 +111,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.300/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }
