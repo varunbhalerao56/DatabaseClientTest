@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "/0ai41irF+ZBeZ0zn8gwfYVR81CFvxqkWSbvylkpqHeGJPzaWmreENNVZTWHU1J3Q+aeHgceWEHlHFMCYKMCiw==",
+  "dgSpecHash": "DAGbwP+0a2vCzHIkFNDli5ws300MczIdXcFxWqAbzmszl83x53AqAHLCnfDXVGF+nO/XOD+2FHsYfHh8QvXEfA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\huanting\\Source\\Repos\\Ollie\\DatabaseClientTest\\C#.csproj",
+  "projectFilePath": "/Users/skywar56/Documents/DatabaseClientTest/C#.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\huanting\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+    "/Users/skywar56/.nuget/packages/newtonsoft.json/13.0.1/newtonsoft.json.13.0.1.nupkg.sha512"
   ],
   "logs": []
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DatabaseClient.Services
+namespace DatabaseClientTest.Services
 {
     public class PerformerCardService : Repository<PerformerCard>, IPerformerCardService
     {
