@@ -57,7 +57,7 @@ namespace DatabaseClientTest.Services
                 }
 
                 var content = new StringContent(JsonConvert.SerializeObject(values), Encoding.UTF8, "application/json");
-              
+
                 HttpResponseMessage response = await client.PostAsync($"http://localhost:5001/ollie-verse-prod/us-central1/{endpointURL}", content);
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
@@ -83,12 +83,45 @@ namespace DatabaseClientTest.Services
                 throw new Exception(e.Message);
             }
         }
+
+
+        public async Task GetSingleNoReturn(string endpointURL, List<DataItem> dataItems)
+        {
+            HttpClient client = new HttpClient();
+            try
+            {
+                Dictionary<string, dynamic> values = new Dictionary<string, dynamic>();
+
+                foreach (var dataItem in dataItems)
+                {
+                    values.Add(dataItem.FieldName, dataItem.Value);
+                }
+
+                var content = new StringContent(JsonConvert.SerializeObject(values), Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await client.PostAsync($"http://localhost:5001/ollie-verse-prod/us-central1/{endpointURL}", content);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+                client.Dispose();
+
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine("\nException Caught!");
+
+                client.Dispose();
+                throw new Exception(e.Message);
+            }
+        }
     }
 
     public interface IRepository<T> where T : class
     {
         Task<List<T>> GetAll(string endpointURL);
         Task<T> GetSingle(string endpointURL, List<DataItem> dataItems);
+
+        Task GetSingleNoReturn(string endpointURL, List<DataItem> dataItems);
 
     }
 }

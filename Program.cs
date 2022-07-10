@@ -301,6 +301,66 @@ async Task<List<int>> GetPlayerEffectCardIdsOwnedByPlayer(int playerId)
     }
 }
 
+async Task AddPerformerCardAndAssignToPlayer(
+        int playerId,
+        string creatorWalletAddress,
+        string name,
+        int actionCostForSummon,
+        string imageAddress,
+        PerformerCard.Type performerType,
+        int cardQuality,
+        int defaultMaxHealth,
+        int defaultAttackPower,
+        string backgroundAddress)
+{
+
+    try
+    {
+        System.Random random = new System.Random();
+
+        List<DataItem> dataItems = new List<DataItem>();
+        int id = random.Next(100000);
+
+        dataItems.Add(new DataItem("id", id));
+        dataItems.Add(new DataItem("playerId", playerId));
+        dataItems.Add(new DataItem("creatorWalletAddress", creatorWalletAddress));
+        dataItems.Add(new DataItem("actionCostForSummon", actionCostForSummon));
+        dataItems.Add(new DataItem("name", name));
+        dataItems.Add(new DataItem("imageAddress", imageAddress));
+        dataItems.Add(new DataItem("performerType", performerType));
+        dataItems.Add(new DataItem("cardQuality", cardQuality));
+        dataItems.Add(new DataItem("defaultMaxHealth", defaultMaxHealth));
+        dataItems.Add(new DataItem("defaultAttackPower", defaultAttackPower));
+        dataItems.Add(new DataItem("backgroundAddress", backgroundAddress));
+
+
+        Console.WriteLine($"AddPerformerCardAndAssignToPlayer");
+
+        await dbService.PlayerData.GetSingleNoReturn("AddPerformerCardAndAssignToPlayer", dataItems);
+
+        await AddPerformerCardToPlayer(id, playerId);
+
+
+    }
+    catch (System.Exception)
+    {
+
+        Console.WriteLine($"AddPerformerCardAndAssignToPlayer:NULL");
+    }
+
+
+
+}
+
+async Task AddPerformerCardToPlayer(int performerCardId, int playerId)
+{
+
+    List<DataItem> dataItems = new List<DataItem>();
+    dataItems.Add(new DataItem("playerId", playerId));
+    dataItems.Add(new DataItem("performerCardId", performerCardId));
+    await dbService.PlayerData.GetSingle("AddPerformerCardToPlayer", dataItems);
+}
+
 await AddNewPlayer("C123");
 Console.WriteLine("---------------");
 await GetPlayerId("C123");
@@ -341,6 +401,17 @@ await GetPerformerEffectCardIdsOwnedByPlayer(1);
 Console.WriteLine("---------------");
 await GetPlayerEffectCardIdsOwnedByPlayer(1);
 Console.WriteLine("---------------");
-
-
+await AddPerformerCardAndAssignToPlayer(
+    1,
+    "C123",
+    "Pathfinder",
+    5,
+    "ada",
+    PerformerCard.Type.COMEDIAN,
+    3,
+    10,
+    10,
+    "backgroundAddress"
+);
+Console.WriteLine("---------------");
 
