@@ -361,57 +361,93 @@ async Task AddPerformerCardToPlayer(int performerCardId, int playerId)
     await dbService.PlayerData.GetSingle("AddPerformerCardToPlayer", dataItems);
 }
 
-await AddNewPlayer("C123");
-Console.WriteLine("---------------");
-await GetPlayerId("C123");
-Console.WriteLine("---------------");
-await IsNewPlayer("C123");
-Console.WriteLine("---------------");
-await GetCardBackgrounds();
-Console.WriteLine("---------------");
-await GetUsableItems();
-Console.WriteLine("---------------");
-await GetPerformerCertificates();
-Console.WriteLine("---------------");
-await GetPerformerCards();
-Console.WriteLine("---------------");
-await GetPerformerEffectCards();
-Console.WriteLine("---------------");
-await AddPerformerCertificateToPlayer(12, 1);
-Console.WriteLine("---------------");
-await AddUsableItemToPlayer(2, 1);
-Console.WriteLine("---------------");
-await AddCardBackgroundToPlayer(3, 1);
-Console.WriteLine("---------------");
-await GetPerformerCertificateIdsOwnedByPlayer(1);
-Console.WriteLine("---------------");
-await GetUsableItemIdsOwnedByPlayer(1);
-Console.WriteLine("---------------");
-await GetCardBackgroundIdsOwnedByPlayer(1);
-Console.WriteLine("---------------");
-await AddDefaultPerformerCardsToPlayer(1);
-Console.WriteLine("---------------");
-await AddDefaultPerformerEffectCardsToPlayer(1);
-Console.WriteLine("---------------");
-await AddDefaultPlayerEffectCardsToPlayer(1);
-Console.WriteLine("---------------");
-await GetPerformerCardIdsOwnedByPlayer(1);
-Console.WriteLine("---------------");
-await GetPerformerEffectCardIdsOwnedByPlayer(1);
-Console.WriteLine("---------------");
-await GetPlayerEffectCardIdsOwnedByPlayer(1);
-Console.WriteLine("---------------");
-await AddPerformerCardAndAssignToPlayer(
-    1,
-    "C123",
-    "Pathfinder",
-    5,
-    "ada",
-    PerformerCard.Type.COMEDIAN,
-    3,
-    10,
-    10,
-    "backgroundAddress"
-);
-Console.WriteLine("---------------");
+async Task GetPlayerEffectCards()
+{
+    List<OwnPlayerEffectCard> allOwnPlayerEffectCards = new List<OwnPlayerEffectCard>();
+    List<OpposingPlayerEffectCard> allOpposingPlayerEffectCards = new List<OpposingPlayerEffectCard>();
+
+    var effectCards = await dbService.PlayerData.GetAllJson("GetPlayerEffectCards");
+    foreach (var effectCard in effectCards)
+    {
+        if (effectCard["ApplicablePlayer"] == "SELF")
+        {
+            string usableItemJson = JsonConvert.SerializeObject(effectCard, Newtonsoft.Json.Formatting.Indented);
+            OwnPlayerEffectCard? usableItemList = JsonConvert.DeserializeObject<OwnPlayerEffectCard>(usableItemJson);
+            allOwnPlayerEffectCards.Add(usableItemList);
+        }
+        else if (effectCard["ApplicablePlayer"] == "OPPONENT")
+        {
+            string usableItemJson = JsonConvert.SerializeObject(effectCard, Newtonsoft.Json.Formatting.Indented);
+            OpposingPlayerEffectCard? usableItemList = JsonConvert.DeserializeObject<OpposingPlayerEffectCard>(usableItemJson);
+            allOpposingPlayerEffectCards.Add(usableItemList);
+        }
+    }
+
+    foreach (var item in allOwnPlayerEffectCards)
+    {
+        Console.WriteLine(item.Name);
+    }
+
+    foreach (var item in allOpposingPlayerEffectCards)
+    {
+        Console.WriteLine(item.Name);
+    }
+
+}
+
+await GetPlayerEffectCards();
+
+//await AddNewPlayer("C123");
+//Console.WriteLine("---------------");
+//await GetPlayerId("C123");
+//Console.WriteLine("---------------");
+//await IsNewPlayer("C123");
+//Console.WriteLine("---------------");
+//await GetCardBackgrounds();
+//Console.WriteLine("---------------");
+//await GetUsableItems();
+//Console.WriteLine("---------------");
+//await GetPerformerCertificates();
+//Console.WriteLine("---------------");
+//await GetPerformerCards();
+//Console.WriteLine("---------------");
+//await GetPerformerEffectCards();
+//Console.WriteLine("---------------");
+//await AddPerformerCertificateToPlayer(12, 1);
+//Console.WriteLine("---------------");
+//await AddUsableItemToPlayer(2, 1);
+//Console.WriteLine("---------------");
+//await AddCardBackgroundToPlayer(3, 1);
+//Console.WriteLine("---------------");
+//await GetPerformerCertificateIdsOwnedByPlayer(1);
+//Console.WriteLine("---------------");
+//await GetUsableItemIdsOwnedByPlayer(1);
+//Console.WriteLine("---------------");
+//await GetCardBackgroundIdsOwnedByPlayer(1);
+//Console.WriteLine("---------------");
+//await AddDefaultPerformerCardsToPlayer(1);
+//Console.WriteLine("---------------");
+//await AddDefaultPerformerEffectCardsToPlayer(1);
+//Console.WriteLine("---------------");
+//await AddDefaultPlayerEffectCardsToPlayer(1);
+//Console.WriteLine("---------------");
+//await GetPerformerCardIdsOwnedByPlayer(1);
+//Console.WriteLine("---------------");
+//await GetPerformerEffectCardIdsOwnedByPlayer(1);
+//Console.WriteLine("---------------");
+//await GetPlayerEffectCardIdsOwnedByPlayer(1);
+//Console.WriteLine("---------------");
+//await AddPerformerCardAndAssignToPlayer(
+//    1,
+//    "C123",
+//    "Pathfinder",
+//    5,
+//    "ada",
+//    PerformerCard.Type.COMEDIAN,
+//    3,
+//    10,
+//    10,
+//    "backgroundAddress"
+//);
+//Console.WriteLine("---------------");
 

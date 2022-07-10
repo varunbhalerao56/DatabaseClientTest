@@ -114,7 +114,41 @@ namespace DatabaseClientTest.Services
                 throw new Exception(e.Message);
             }
         }
+
+        public async Task<List<Dictionary<String, dynamic>>> GetAllJson(string endpointURL)
+        {
+            HttpClient client = new HttpClient();
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync($"http://localhost:5001/ollie-verse-prod/us-central1/{endpointURL}");
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+                Dictionary<string, dynamic>? responseDict = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(responseBody);
+
+                string usableItemJson = JsonConvert.SerializeObject(responseDict!["data"], Newtonsoft.Json.Formatting.Indented);
+
+                List<Dictionary<String, dynamic>>? usableItemList = JsonConvert.DeserializeObject<List<Dictionary<String, dynamic>>>(usableItemJson);
+
+                Console.WriteLine("Data: " + endpointURL);
+                foreach (var item in usableItemList!)
+                {
+                    Console.WriteLine(item.ToString());
+                }
+                client.Dispose();
+
+                return usableItemList!;
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine("\nException Caught!");
+
+                client.Dispose();
+                throw new Exception(e.Message);
+            }
+        }
     }
+
 
     public interface IRepository<T> where T : class
     {
@@ -122,6 +156,8 @@ namespace DatabaseClientTest.Services
         Task<T> GetSingle(string endpointURL, List<DataItem> dataItems);
 
         Task GetSingleNoReturn(string endpointURL, List<DataItem> dataItems);
+
+        Task<List<Dictionary<String, dynamic>>> GetAllJson(string endpointURL);
 
     }
 }

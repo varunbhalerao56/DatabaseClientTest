@@ -148,6 +148,22 @@ namespace DatabaseClientTest.Services
         }
     }
 
+    public class OpposingPlayerEffectCard : PlayerEffectCard
+    {
+        public enum Effect
+        {
+            STOP_ATTACK
+        }
+
+        public Effect ApplicableEffect;
+
+        public OpposingPlayerEffectCard(int id, string creatorWalletAddress, string transactionHash, string tokenId, string name, int actionCostForSummon, string imageAddress, Effect applicableEffect)
+            : base(id, creatorWalletAddress, transactionHash, tokenId, name, actionCostForSummon, imageAddress)
+        {
+            ApplicableEffect = applicableEffect;
+        }
+    }
+
     public abstract class PlayerEffectCard : Card
     {
         protected PlayerEffectCard(int id, string creatorWalletAddress, string transactionHash, string tokenId, string name, int actionCostForSummon, string imageAddress)
